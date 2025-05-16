@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Email: {{ user.email }}</p>
+
+<h4>Your Purchase History</h4>
+<ul>
+  {% for order in user.order_set.all %}
+    <li>Order #{{ order.id }} - {{ order.status }} - ${{ order.total_amount }} - {{ order.created_at|date:"M d, Y" }}</li>
+  {% empty %}
+    <li>No orders found.</li>
+  {% endfor %}
+</ul>
+
+<h4>Your Reviews (To Implement)</h4>
+<p>You can add product reviews management here.</p>
+{% endblock %}

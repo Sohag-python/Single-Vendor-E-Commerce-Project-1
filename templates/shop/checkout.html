@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h2>Checkout</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>${{ item.product.new_price }}</td>
+      <td>${{ item.product.new_price|floatformat:2|add:"0"|floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><strong>Total Amount: ${{ total }}</strong></p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-success">Confirm and Pay</button>
+</form>
+{% endblock %}
